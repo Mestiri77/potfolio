@@ -1,0 +1,28 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "C:\\Users\\farou\\OneDrive\\Bureau\\MESTIRI\\projects\\coding\\Templates\\Portfolios\\interactive portfolio\\dist"
+publishOrigin = "ui"
+commandOrigin = "ui"
+base = "C:\\Users\\farou\\OneDrive\\Bureau\\MESTIRI\\projects\\coding\\Templates\\Portfolios\\interactive portfolio"
+command = "yarn run build"
+
+[build.environment]
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
