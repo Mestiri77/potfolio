@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { RotatingText } from './RotatingText';
-import heroImage from '../assets/9e94761fe39ede1028a23154f9511cfbfa815afd.png';
+import heroImage from '../assets/me.png';
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
