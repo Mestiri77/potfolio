@@ -1867,3 +1867,52 @@ html {
   inherits: false;
   initial-value: 0 0 #0000;
 }
+
+/* --- Custom additions: marquee + cursor --- */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* hide system cursor when enabled */
+.cursor-hidden, .cursor-hidden body, .cursor-hidden * { cursor: none !important; }
+
+.custom-cursor {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px; /* center on pointer */
+  margin-top: -7px;
+  border-radius: 9999px;
+  background: oklch(.705 .213 47.604); /* orange-500 */
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.15);
+  transition: transform 150ms ease, opacity 150ms ease;
+  will-change: transform, opacity;
+}
+
+/* Scrollbar styling */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(.705 .213 47.604) rgba(255,255,255,0.08);
+}
+/* WebKit */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.08);
+}
+*::-webkit-scrollbar-thumb {
+  background: oklch(.705 .213 47.604);
+  border-radius: 9999px;
+  border: 2px solid rgba(0,0,0,0.4);
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: oklch(.705 .213 47.604 / 0.9);
+}

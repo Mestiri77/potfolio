@@ -27,7 +27,7 @@ export function Navigation() {
   return (
     <motion.nav
       style={{ backgroundColor }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-lg relative`}
+      className={`fixed top-0 left-0 right-0 z-[200] transition-all duration-300 backdrop-blur-lg relative`}
     >
       {/* Animated gradient borders (top & bottom) */}
       <motion.div
@@ -66,8 +66,8 @@ export function Navigation() {
             />
           </motion.a>
 
-          {/* Desktop Navigation */}
-          <div className="flex items-center gap-8">
+          {/* Desktop Navigation (md and up) */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.a
                 key={item}
@@ -83,69 +83,45 @@ export function Navigation() {
                 />
               </motion.a>
             ))}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button
-                variant="outline"
-                className="bg-white text-black border-white/30 hover:bg-white hover:text-black transition-all duration-300 rounded-full cursor-pointer"
-              >
-                <motion.span
-                  className="mr-2 inline-flex"
-                  animate={{ scale: [1, 1.15, 1], y: [0, -2, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  <Download className="w-4 h-4" />
-                </motion.span>
-                DOWNLOAD CV
-              </Button>
-            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             className="md:hidden text-white"
+            aria-label="Toggle menu"
+            aria-controls="mobile-menu"
+            aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
-          {/* CTA Button */}
+          {/* md-only compact CTA (icon) */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="md:hidden"
+            className="hidden md:flex lg:hidden"
           >
             <Button
               variant="outline"
-              className="bg-white text-black border-white/30 hover:bg-white hover:text-black w-full transition-all duration-300 rounded-full cursor-pointer"
+              className="bg-white text-black border-white/30 hover:bg-white hover:text-black transition-all duration-300 rounded-full cursor-pointer p-2"
+              title="Download CV"
             >
-              <motion.span
-                className="mr-2 inline-flex"
-                animate={{ scale: [1, 1.15, 1], y: [0, -2, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <Download className="w-4 h-4" />
-              </motion.span>
-              DOWNLOAD CV
+              <Download className="w-4 h-4" />
             </Button>
           </motion.div>
 
-          {/* Desktop CTA Button */}
+          {/* Desktop CTA Button (lg and up) */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="md:flex hidden"
+            className="hidden lg:flex"
           >
             <Button
               variant="outline"
@@ -169,6 +145,7 @@ export function Navigation() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
+            id="mobile-menu"
             className="md:hidden mt-4 pb-4 flex flex-col gap-4"
           >
             {navItems.map((item) => (
