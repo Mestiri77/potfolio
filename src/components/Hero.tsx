@@ -17,10 +17,38 @@ export function Hero() {
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black z-0" />
 
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <style>{`
+          @keyframes meteor {
+            0% { transform: translate3d(0,0,0) rotate(45deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translate3d(120vw, 120vh, 0) rotate(45deg); opacity: 0; }
+          }
+          .meteor { position: absolute; width: 2px; height: 2px; background: transparent; box-shadow: 0 0 6px 2px rgba(255,255,255,0.6); }
+          .meteor::after { content: ""; position: absolute; top: 0; left: 0; width: 140px; height: 2px; background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0)); transform: translateX(-120px); }
+          .animate-meteor { animation: meteor 4s linear infinite; }
+          .starfield { position: absolute; inset: 0; background-image:
+            radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.7) 50%, transparent 51%),
+            radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.8) 50%, transparent 51%),
+            radial-gradient(1.5px 1.5px at 80% 50%, rgba(255,255,255,0.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.7) 50%, transparent 51%),
+            radial-gradient(1px 1px at 90% 15%, rgba(255,255,255,0.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.8) 50%, transparent 51%),
+            radial-gradient(1px 1px at 70% 85%, rgba(255,255,255,0.7) 50%, transparent 51%);
+            background-repeat: no-repeat; background-color: transparent; opacity: 0.65; }
+        `}</style>
+        <div className="starfield" />
+        <div className="meteor animate-meteor" style={{ top: '-10vh', left: '-10vw', animationDelay: '0s' }} />
+        <div className="meteor animate-meteor" style={{ top: '-20vh', left: '10vw', animationDelay: '1.2s' }} />
+        <div className="meteor animate-meteor" style={{ top: '-15vh', left: '35vw', animationDelay: '2.4s' }} />
+        <div className="meteor animate-meteor" style={{ top: '-25vh', left: '65vw', animationDelay: '3.6s' }} />
+      </div>
+
       {/* Content Container */}
       <motion.div
         style={{ opacity }}
-        className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 min-h-screen flex items-center"
+        className="relative z-10 max-w-7xl mx-auto px-6 pt-4 lg:pt-6 pb-8 min-h-screen flex items-center"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
         <div className="max-w-2xl">
@@ -40,26 +68,36 @@ export function Hero() {
               Aslema –
             </motion.h1>
             <motion.div
-              className="flex items-center gap-4"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex items-center gap-4"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <h1 className="text-white">I'M FAROUK</h1>
+            <motion.div
+              animate={{
+                x: [0, 10, 0],
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              <h1 className="text-white">I'M FAROUK</h1>
-              <motion.div
-                animate={{
-                  x: [0, 10, 0],
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <ArrowUpRight className="w-12 h-12 text-white" />
-              </motion.div>
+              <ArrowUpRight className="w-12 h-12 text-white" />
             </motion.div>
+          </motion.div>
+          {/* Active dot row */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-3 flex items-center gap-2"
+          >
+            <span className="inline-block w-3 h-3 rounded-full bg-lime-400 shadow-[0_0_0_3px_rgba(163,230,53,0.25)]" />
+            <span className="text-white/80 text-sm">Open to work</span>
+          </motion.div>
           </motion.div>
 
           {/* Description */}
@@ -86,6 +124,7 @@ export function Hero() {
               transition={{ duration: 0.3 }}
             >
               <h2 className="text-white">
+                PROBLEM SOLVER &<br />
                 <RotatingText 
                   texts={[
                     'FULL-STACK DEVELOPER',
@@ -94,8 +133,7 @@ export function Hero() {
                     'NETWORK MARKETER'
                   ]}
                   interval={2500}
-                /> &<br />
-                PROBLEM SOLVER
+                />
               </h2>
               <motion.div
                 className="h-1 bg-gradient-to-r from-orange-500 to-transparent mt-2"
@@ -112,11 +150,11 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.8, x: 100 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="relative block"
+            className="relative block h-[85vh] lg:h-[calc(100vh-2rem)]"
           >
             <motion.div
               style={{ y: imageY, rotate: imageRotate }}
-              className="relative"
+              className="relative h-full"
             >
               {/* Glow Effect */}
               <motion.div
@@ -134,21 +172,31 @@ export function Hero() {
 
               {/* Main Image */}
               <motion.div
-                className="relative overflow-hidden rounded-3xl"
+                className="relative overflow-hidden rounded-3xl h-full"
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 transition={{ duration: 0.4 }}
               >
                 <img
                   src={heroImage}
                   alt="Farouk - Full-Stack Developer"
-                  className="w-full h-auto object-cover transform scale-x-[-1]"
+                  className="w-full h-full object-cover object-[center_top] transform scale-x-[-1]"
                   style={{
-                    maxWidth: '600px',
                     filter: 'brightness(1.1) contrast(1.1)',
                     mixBlendMode: 'lighten',
                   }}
                   loading="lazy"
                 />
+                {/* Crown icon */}
+                <motion.div
+                  className="absolute right-6 top-6"
+                  animate={{ rotate: [ -6, 6, -6 ], y: [ -4, 0, -4 ] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <svg width="44" height="44" viewBox="0 0 64 64" fill="none" stroke="rgba(255,255,255,.8)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 46 L12 22 L24 34 L36 16 L52 30 L56 46 Z" />
+                    <path d="M8 46 H56" />
+                  </svg>
+                </motion.div>
               </motion.div>
 
               {/* Decorative Elements */}
